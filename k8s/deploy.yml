@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: reactnative3-ingress
+spec:
+  rules:
+    - host: reactnative3-mobile1-dev.empcbr.thoughtworks-labs.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: reactnative3
+                port: 
+                  number: 80
+  tls:
+  - hosts:
+    - reactnative3-mobile1-dev.empcbr.thoughtworks-labs.net
+    secretName: letencryptkey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reactnative3
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: reactnative3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactnative3
+  labels:
+    app: reactnative3
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: reactnative3
+  template:
+    metadata:
+      labels:
+        app: reactnative3
+    spec:
+      containers:
+      - name: reactnative3
+        image: 626109959667.dkr.ecr.us-east-1.amazonaws.com/reactnative3:{image-tag}
+        ports:
+        - containerPort: 80

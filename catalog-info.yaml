@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "reactnative3"
+  description: "Template React Native"
+  links:
+    - url: https://reactnative3-mobile1-dev.empcbr.thoughtworks-labs.net
+      title: reactnative3
+      icon: dashboard
+  annotations:
+    circleci.com/project-slug: github/platform-dx/templatern3-23ac2fc
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug:  platform-dx/templatern3-23ac2fc
+    sonarqube.org/project-key: "reactnative3"
+    backstage.io/kubernetes-label-selector: "app=reactnative3"
+    backstage.io/adr-location: docs/adrs/
+
+spec:
+  type: website
+  lifecycle: experimental
+  owner: "demodx"
